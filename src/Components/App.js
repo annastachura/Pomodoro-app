@@ -1,4 +1,4 @@
-// import react from "react";
+import react from "react";
 
 
 class App extends React.Component {
@@ -6,9 +6,11 @@ class App extends React.Component {
         super(props);
     this.state  = {
 
+
     }
 }
     render () {
+        
 
     }
 }
