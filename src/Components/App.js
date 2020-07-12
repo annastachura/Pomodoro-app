@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import Header from "../Components/Header";
 import Buttons from "../Components/Buttons";
 import PomodoroTime from "../Components/PomodoroTime";
@@ -19,7 +19,8 @@ class App extends React.Component {
             <PomodoroTime></PomodoroTime>
             <Buttons></Buttons>
             </div>
-
         )
     }
 }
+
+export default App;
