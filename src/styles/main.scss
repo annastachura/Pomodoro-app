@@ -1,0 +1,44 @@
+body {
+    margin: 20px;
+}
+
+.header {
+    &__input {
+        border-radius: 5px;
+        width: 200px;
+        height: 30px;
+        
+
+
+    }
+}
+
+.buttons {
+    
+    &__start {
+        height: 50px;
+        width: 90px;
+        border-radius: 5px;
+        margin-right: 30px;
+        background-color: rgb(99, 207, 175);
+        font-size: 20px;
+        
+        
+    }
+    &__stop {
+        height: 50px;
+        width: 90px;
+        border-radius: 5px;
+        margin-right: 30px;
+        background-color: rgb(168, 94, 110);
+        font-size: 20px;
+}
+    &__reset{
+    height: 50px;
+    width: 90px;
+    border-radius: 5px;
+    margin-right: 30px;
+    background-color: rgb(161, 167, 79);
+    font-size: 20px;
+}
+}
