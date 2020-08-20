@@ -27,7 +27,12 @@ intervalId = null
                 return {
                     remainingTimeInSeconds: prevState.remainingTimeInSeconds - 1
                 }
-            })
+            }) 
+             const {remainingTimeInSeconds} = this.state
+             if (remainingTimeInSeconds <= 0) {
+                 this.onStopped()
+                 console.log ("Gratulacje, zasłuzyłeś na przerwę");
+             }
         }, 1000)
     }
 
@@ -46,7 +51,8 @@ intervalId = null
 
         })
     }
-
+    
+    
 
 
     render() {
