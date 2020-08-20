@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Components/Header";
 import Buttons from "../Components/Buttons";
 import PomodoroTime from "../Components/PomodoroTime";
+import PomodoroFinishPopup from "./PomodoroFinishPopup";
 
 const defaultPomodoroTimeInSeconds = 10
 
@@ -62,6 +63,7 @@ intervalId = null
                 <Header></Header>
                 <PomodoroTime remainingTimeInSeconds={remainingTimeInSeconds}></PomodoroTime>
                 <Buttons isRunning={isRunning} onStart={this.onStart} onStopped={this.onStopped} onReset = {this.onReset}></Buttons>
+                <PomodoroFinishPopup></PomodoroFinishPopup>
             </div>
         )
     }
