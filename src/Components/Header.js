@@ -7,7 +7,7 @@ class Header extends React.Component {
     
     return (
         <div class = "header">
-        <img class = "header__photo" src = ""></img>
+        <img class = "header__photo" src = '../picture/time.jpg'></img>
         <input class = "header__input"></input>
         </div>
     )

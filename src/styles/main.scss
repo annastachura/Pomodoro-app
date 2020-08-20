@@ -5,15 +5,18 @@ body {
 .header {
     &__input {
         border-radius: 5px;
-        width: 200px;
-        height: 30px;
-        
-
-
+        width: 220px;
+        height: 40px;
+    }
+    &__photo {
+        background-image: url('./../picture/time.jpg');
+        background-size: 100% 100%;
+        object-fit: contain;
     }
 }
 
 .buttons {
+    text-align: center;
     
     &__start {
         height: 50px;
@@ -42,3 +45,10 @@ body {
     font-size: 20px;
 }
 }
+
+.pomodoro__time {
+font-size: 100px;
+text-align: center;
+
+}
+
