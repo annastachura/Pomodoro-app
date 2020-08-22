@@ -11,7 +11,10 @@ class App extends React.Component {
         super(props);
         this.state = {
             isRunning: false,
-            remainingTimeInSeconds: defaultPomodoroTimeInSeconds
+            remainingTimeInSeconds: defaultPomodoroTimeInSeconds,
+            isFinished: false,
+            isBreak: false,
+
 
         }
     }
@@ -33,6 +36,9 @@ intervalId = null
              if (remainingTimeInSeconds <= 0) {
                  this.onStopped()
                  console.log ("Gratulacje, zasłuzyłeś na przerwę");
+                 this.setState ({
+                     isFinished: true
+                 })
              }
         }, 1000)
     }
@@ -48,8 +54,18 @@ intervalId = null
     onReset = () => {
         this.onStopped()
         this.setState({
-            remainingTimeInSeconds:defaultPomodoroTimeInSeconds
+            remainingTimeInSeconds:defaultPomodoroTimeInSeconds,
+            isFinished:false
+        
 
+        })
+    }
+    
+    onBreakConfirmed = () => {
+        this.setState ({
+            isRunning: false,
+            remainingTimeInSeconds: 5*60,
+            isFinished: false
         })
     }
     
@@ -57,13 +73,13 @@ intervalId = null
 
 
     render() {
-        const { isRunning, remainingTimeInSeconds,} = this.state;
+        const { isRunning, remainingTimeInSeconds,isFinished, isBreak} = this.state;
         return (
             <div>
                 <Header></Header>
                 <PomodoroTime remainingTimeInSeconds={remainingTimeInSeconds}></PomodoroTime>
                 <Buttons isRunning={isRunning} onStart={this.onStart} onStopped={this.onStopped} onReset = {this.onReset}></Buttons>
-                <PomodoroFinishPopup></PomodoroFinishPopup>
+                <PomodoroFinishPopup isFinished = {isFinished} onBreakConfirmed = {this.onBreakConfirmed}></PomodoroFinishPopup>
             </div>
         )
     }
