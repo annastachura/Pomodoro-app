@@ -4,6 +4,7 @@ import Buttons from "../Components/Buttons";
 import PomodoroTime from "../Components/PomodoroTime";
 import PomodoroFinishPopup from "./PomodoroFinishPopup";
 import PomodoroBreakButtons from "./PomodoroBreakButtons";
+import BreakFinishPopup from "./BreakFinishPopup";
 
 const defaultPomodoroTimeInSeconds = 10
 
@@ -15,7 +16,6 @@ class App extends React.Component {
             remainingTimeInSeconds: defaultPomodoroTimeInSeconds,
             isFinished: false,
             isBreak: false,
-
 
         }
     }
@@ -65,8 +65,9 @@ intervalId = null
     onBreakConfirmed = () => {
         this.setState ({
             isRunning: false,
-            remainingTimeInSeconds: 5*60,
-            isFinished: false
+            remainingTimeInSeconds: 10,
+            isFinished: false,
+            isBreak: true
         })
     }
     
@@ -87,7 +88,8 @@ intervalId = null
                  this.onStopped()
                  console.log ("Przerwa zakończona. Pora wrócić do pracy");
                  this.setState ({
-                     isFinished: true
+                     isFinished: true,
+                     isBreak:false
                  })
              }
         }, 1000)
@@ -102,16 +104,26 @@ intervalId = null
         clearInterval(this.intervalId)
     }
 
+    onNewPomodoroStart = () => {
+        this.setState ({
+        isRunning: false,
+        remainingTimeInSeconds: defaultPomodoroTimeInSeconds,
+        isFinished: false,
+        isBreak: false
+        })   
+    }
+
 
     render() {
-        const { isRunning, remainingTimeInSeconds,isFinished, isBreak} = this.state;
+        const { isRunning, remainingTimeInSeconds,isFinished, isBreak, onNewPomodoroStart} = this.state;
         return (
             <div>
                 <Header></Header>
                 <PomodoroTime remainingTimeInSeconds={remainingTimeInSeconds}></PomodoroTime>
                 <Buttons isRunning={isRunning} onStart={this.onStart} onStopped={this.onStopped} onReset = {this.onReset}></Buttons>
                 <PomodoroFinishPopup isFinished = {isFinished} onBreakConfirmed = {this.onBreakConfirmed}></PomodoroFinishPopup>
-                <PomodoroBreakButtons onBreakStart = {this.onBreakStart} onBreakStop = {this.onBreakStop}></PomodoroBreakButtons>
+                <PomodoroBreakButtons isBreak = {isBreak} onBreakStart = {this.onBreakStart} onBreakStop = {this.onBreakStop}></PomodoroBreakButtons>
+                <BreakFinishPopup onNewPomodoroStart = {onNewPomodoroStart}></BreakFinishPopup>
             </div>
         )
     }
