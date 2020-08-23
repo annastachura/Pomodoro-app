@@ -3,6 +3,7 @@ import Header from "../Components/Header";
 import Buttons from "../Components/Buttons";
 import PomodoroTime from "../Components/PomodoroTime";
 import PomodoroFinishPopup from "./PomodoroFinishPopup";
+import PomodoroBreakButtons from "./PomodoroBreakButtons";
 
 const defaultPomodoroTimeInSeconds = 10
 
@@ -69,7 +70,37 @@ intervalId = null
         })
     }
     
+    onBreakStart = () => {
+        this.setState ({
+            isRunning:true,
+            
+        })
+
+        this.intervalId = setInterval(() => {
+            this.setState((prevState) => {
+                return {
+                    remainingTimeInSeconds: prevState.remainingTimeInSeconds - 1
+                }
+            }) 
+             const {remainingTimeInSeconds} = this.state
+             if (remainingTimeInSeconds <= 0) {
+                 this.onStopped()
+                 console.log ("Przerwa zakończona. Pora wrócić do pracy");
+                 this.setState ({
+                     isFinished: true
+                 })
+             }
+        }, 1000)
     
+    }
+
+    onBreakStop = () => {
+        this.setState ({
+            isRunning:false,
+
+        })
+        clearInterval(this.intervalId)
+    }
 
 
     render() {
@@ -80,6 +111,7 @@ intervalId = null
                 <PomodoroTime remainingTimeInSeconds={remainingTimeInSeconds}></PomodoroTime>
                 <Buttons isRunning={isRunning} onStart={this.onStart} onStopped={this.onStopped} onReset = {this.onReset}></Buttons>
                 <PomodoroFinishPopup isFinished = {isFinished} onBreakConfirmed = {this.onBreakConfirmed}></PomodoroFinishPopup>
+                <PomodoroBreakButtons onBreakStart = {this.onBreakStart} onBreakStop = {this.onBreakStop}></PomodoroBreakButtons>
             </div>
         )
     }
